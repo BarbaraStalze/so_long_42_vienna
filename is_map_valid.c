@@ -27,9 +27,9 @@ void	ft_surrounded_by_walls(t_game *game)
 	i = 0;
 	while (game->map[i])
 	{
-		if (game->map[i][0] != '1' || game->map[i][game->map_y] != '1')
+		if (game->map[i][0] != '1' || game->map[i][game->map_w] != '1')
 			ft_error("Map is not surrounded by walls\n", game);
-		if (i == 0 || i == game->map_x)
+		if (i == 0 || i == game->map_h)
 		{
 			j = 1;
 			while (game->map[i][j])
@@ -77,4 +77,5 @@ void	ft_is_map_valid(t_game *game)
 
 	ft_surrunded_by_walls(game);
 	ft_features_right(game);
+	ft_valid_path(game);
 }

@@ -29,7 +29,7 @@ void	ft_free_array(char **a)
 	a = 0;
 }
 
-static void	ft_is_nextline(t_game game, char **new_map, char byte)
+static void	ft_is_nextline(t_game *game, char **new_map, char byte)
 {
 	if (byte == '\n')
 	{
@@ -39,17 +39,17 @@ static void	ft_is_nextline(t_game game, char **new_map, char byte)
 			ft_error("Map rows do not have equal length\n", game);
 		}
 		game->map_width = j;
-		game->map_x++;
-		game->map_y = 0;
+		game->map_h++;
+		game->map_w = 0;
 	}
 }
 
-static char	**ft_malloc_map_width(char **new_map, t_game game, int i)
+static char	**ft_malloc_map_width(char **new_map, t_game *game, int i)
 {
 	int	width;
 
 	if (game->map_width == 0)
-		width = game->map_y;
+		width = game->map_w;
 	else
 		width = game_map_width;
 	new_map[i] = ft_calloc((width + 2) * sizeof(char));
@@ -60,15 +60,15 @@ static char	**ft_malloc_map_width(char **new_map, t_game game, int i)
 	}
 }
 
-static void	ft_array(char byte, t_game game)
+static void	ft_array(char byte, t_game *game)
 {
 	char	**new_map;
 	int	i;
 	int	j;
 
-	new_map = ft_calloc((map_x + 1) * sizeof(char *));
+	new_map = ft_calloc((map_h + 1) * sizeof(char *));
 	i = 0;
-	while (i <= game->map_x)
+	while (i <= game->map_h)
 	{
 		new_map = ft_malloc_map_width(new_map, game, i);
 		new_map[i] = game->map[i];
@@ -89,14 +89,14 @@ static void	ft_array(char byte, t_game game)
 	game->map = new_map;
 }
 
-void	ft_read_map(char *ber_file, t_game game)
+void	ft_read_map(char *ber_file, t_game *game)
 {
 	int		fd;
 	char	byte;
 	
 	fd = open(ber_file, O_RDONLY);
 	if (fd == -1)
-		ft_error("Open failed\n");
+		ft_error("Open failed. Make sure file exists.\n");
 	byte = 1;
 	while (byte > 0)
 	{

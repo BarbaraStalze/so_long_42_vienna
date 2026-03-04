@@ -21,9 +21,15 @@ typedef struct	s_game
 {
 	char	**map;
 	int		map_width;
-	int		map_x;
-	int		map_y;
+	int		map_h;
+	int		map_w;
 	int		collectibles;
 }	t_game
+
+typedef struct  s_path
+{
+	int	start_h;
+	int	start_w;
+}	t_path
 
 #endif

@@ -51,9 +51,9 @@ void	ft_error(char *message, t_game *game)
 {
 	char	*error_message;
 
-	if (game->map_pointer)
+	if (game->map)
 		ft_free_array(game->map_pointer);
-	error_message = ft_truc("Error\n", message);
+	error_message = ft_trunc("Error\n", message);
 	if (!error_message)
 		error_message = "Error\n";
 	perror (error_message);
