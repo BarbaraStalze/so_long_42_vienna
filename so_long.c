@@ -14,14 +14,14 @@
 int	main(int argc, char **argv)
 {
 	int		check;
-	t_game	*game;
+	static t_game	game;
 
-	game = NULL;
 	if (argc != 2)
+	{
 		ft_error("Please enter a valid .ber file name as an argument. 
 			For example: \"map.ber\"", game);
-	check = read_map(arg[1]);
-	if (check == 1)
-		ft_error("File couldn't be read", game);
-	
+	}
+	ft_file_type(arg[1], &game);
+	ft_read_map(arg[1], &game);
+	ft_is_map_vaild(&game);
 }

@@ -19,10 +19,11 @@
 
 typedef struct	s_game
 {
-	char	***map_pointer;
+	char	**map;
 	int		map_width;
 	int		map_x;
 	int		map_y;
+	int		collectibles;
 }	t_game
 
 #endif
