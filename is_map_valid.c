@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-void	ft_file_type(char *filename, t_game *game)
+static void	ft_file_type(char *filename, t_game *game)
 {
 	char	*dot;
 	int	ber;
@@ -19,7 +19,7 @@ void	ft_file_type(char *filename, t_game *game)
         }
 }
 
-void	ft_surrounded_by_walls(t_game *game)
+static void	ft_surrounded_by_walls(t_game *game)
 {
 	int	i;
 	int	j;
@@ -43,7 +43,7 @@ void	ft_surrounded_by_walls(t_game *game)
 	}
 }
 
-void	ft_features_right(t_game *game)
+static void	ft_features_right(t_game *game)
 {
 	int	i;
 	int	j;

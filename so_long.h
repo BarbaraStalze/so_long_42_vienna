@@ -32,4 +32,10 @@ typedef struct  s_path
 	int	start_w;
 }	t_path
 
+void	ft_read_map(char *ber_file, t_game *game);
+void	ft_free_array(char **a);
+void	ft_is_map_valid(t_game *game);
+void	ft_valid_path(t_game *game);
+void	ft_error(char *message, t_game *game);
+
 #endif

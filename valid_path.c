@@ -1,6 +1,6 @@
 #include "so_long.c"
 
-char	**ft_copy_map(t_game game, char **test_map, t_path *path_params)
+static char	**ft_copy_map(t_game game, char **test_map, t_path *path_params)
 {
 	int	i;
 	int	j;
@@ -29,7 +29,7 @@ char	**ft_copy_map(t_game game, char **test_map, t_path *path_params)
 	return (test_map);
 }
 
-void	ft_flood_fill(char ***test_map, int i, int j, int *collectibles);
+static void	ft_flood_fill(char ***test_map, int i, int j, int *collectibles);
 {
 	if (*test_map[i][j] == '1' || (*test_map[i][j] == 'E' && *collectibles != 0))
 		return ;
@@ -43,7 +43,7 @@ void	ft_flood_fill(char ***test_map, int i, int j, int *collectibles);
 	return ;
 }
 
-void	ft_all_flooded(char **test_map, t_game *game)
+static void	ft_all_flooded(char **test_map, t_game *game)
 {
 	int	i;
 	int	j;

@@ -6,7 +6,11 @@ CFLAGS = -Wall -Wextra -Werror -g
 MLXRULE = -I/usr/include -Imlx_linux -O3
 LINKAPI = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 OBJFILES = $(SOURCES:.c=.o)
-SOURCES = \
+SOURCES = so_long.c\
+	read_map.c\
+	is_map_valid.c\
+	valid_path.c\
+	error.c\
 
 all : $(NAME)
 
