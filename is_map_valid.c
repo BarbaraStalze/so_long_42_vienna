@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-static void	ft_file_type(char *filename, t_game *game)
+void	ft_file_type(char *filename, t_game *game)
 {
 	char	*dot;
 	int	ber;

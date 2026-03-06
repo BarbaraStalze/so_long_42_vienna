@@ -12,10 +12,11 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <mlx.h>
+//# include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <fcntl.h>
 
 typedef struct	s_game
 {
@@ -24,14 +25,15 @@ typedef struct	s_game
 	int		map_h;
 	int		map_w;
 	int		collectibles;
-}	t_game
+}	t_game;
 
 typedef struct  s_path
 {
 	int	start_h;
 	int	start_w;
-}	t_path
+}	t_path;
 
+void	ft_file_type(char *filename, t_game *game);
 void	ft_read_map(char *ber_file, t_game *game);
 void	ft_free_array(char **a);
 void	ft_is_map_valid(t_game *game);
