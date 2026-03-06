@@ -5,16 +5,16 @@ void	ft_file_type(char *filename, t_game *game)
 	char	*dot;
 	int	ber;
 
-	dot = strrch(filename, ".");
+	dot = strrchr(filename, '.');
 	if (!dot || dot == filename)
         {
-                ft_error("Please enter a valid .ber file name as an argument.
+                ft_error("Please enter a valid .ber file name as an argument.\
                         For example: \"map.ber\"\n", game);
         }
 	ber = strncmp(dot, ".ber", 5);
 	if (ber != 0)
         {
-                ft_error("Please enter a valid .ber file name as an argument.
+                ft_error("Please enter a valid .ber file name as an argument.\
                         For example: \"map.ber\"\n", game);
         }
 }
@@ -43,12 +43,10 @@ static void	ft_surrounded_by_walls(t_game *game)
 	}
 }
 
-static void	ft_features_right(t_game *game)
+static void	ft_features_right(t_game *game, int start, int exit)
 {
 	int	i;
 	int	j;
-	int	exit;
-	int	start;
 
 	i = 0;
 	while (game->map[i])
@@ -56,11 +54,11 @@ static void	ft_features_right(t_game *game)
 		j = 0;
 		while (game->map[i][j])
 		{
-			if (game->map[i][j] == "E")
+			if (game->map[i][j] == 'E')
 				exit++;
-			else if (game->map[i][j] == "P")
+			else if (game->map[i][j] == 'P')
 				start++;
-			 else if (game->map[i][j] == "C")
+			 else if (game->map[i][j] == 'C')
 				game->collectibles++;
 			j++;
 		}
@@ -75,7 +73,9 @@ void	ft_is_map_valid(t_game *game)
 	int	start;
 	int	exit;
 
-	ft_surrunded_by_walls(game);
-	ft_features_right(game);
+	start = 0;
+	exit = 0;
+	ft_surrounded_by_walls(game);
+	ft_features_right(game, start, exit);
 	ft_valid_path(game);
 }
