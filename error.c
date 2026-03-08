@@ -9,7 +9,7 @@
 /*   Updated: 2026/02/27 12:29:25 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <so_long.h>
+#include "so_long.h"
 
 static size_t	ft_strlen(const char *s)
 {
@@ -52,7 +52,7 @@ void	ft_error(char *message, t_game *game)
 	char	*error_message;
 
 	if (game->map)
-		ft_free_array(game->map_pointer);
+		ft_free_array(game->map);
 	error_message = ft_trunc("Error\n", message);
 	if (!error_message)
 		error_message = "Error\n";
