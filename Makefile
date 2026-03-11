@@ -7,7 +7,7 @@ MLXRULE = -I/usr/include -Imlx_linux -O3
 LINKAPI = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 OBJFILES = $(SOURCES:.c=.o)
 SOURCES = so_long.c \
-	read_map.c \
+	parse_map.c \
 	is_map_valid.c \
 	valid_path.c \
 	error.c \
@@ -15,7 +15,8 @@ SOURCES = so_long.c \
 all : $(NAME)
 
 $(NAME) : $(OBJFILES)
-	$(CC) $(CFLAGS) $(SOURCES) -o $(NAME)
+	@make -C libft bonus
+	$(CC) $(CFLAGS) $(OBJFILES) libft/libft.a -o $(NAME)
 
 %.o : %.c so_long.h
 	$(CC) $(CFLAGS) $(MLXRULE) -c $< -o $@

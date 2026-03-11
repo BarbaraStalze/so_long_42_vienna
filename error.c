@@ -6,19 +6,30 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:14:07 by bastalze          #+#    #+#             */
-/*   Updated: 2026/02/27 12:29:25 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/11 17:15:06 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
 
-static size_t	ft_strlen(const char *s)
+void	ft_free_array(char **a)
 {
-	size_t	len;
+	int	j;
 
-	len = 0;
-	while (s[len] != 0)
-		len ++;
-	return (len);
+	if (a)
+	{
+		j = 0;
+		while (a[j])
+			j++;
+		j--;
+		while (j >= 0)
+		{
+			free(a[j]);
+			a[j] = 0;
+			j--;
+		}
+		free(a);
+		a = 0;
+	}
 }
 
 static char	*ft_trunc(char *error, char *message)
@@ -53,11 +64,18 @@ void	ft_error(char *message, t_game *game)
 
 	if (game->map)
 		ft_free_array(game->map);
+	if (game->fd > 0)
+		close(game->fd);
 	error_message = ft_trunc("Error\n", message);
 	if (!error_message)
-		error_message = "Error\n";
-	perror (error_message);
-	free (error_message);
-	free (game);
+	{
+		error_message = "Error\nMalloc failed";
+		perror (error_message);
+	}
+	else
+	{
+		perror (error_message);
+		free (error_message);
+	}
 	exit (EXIT_FAILURE);
 }
