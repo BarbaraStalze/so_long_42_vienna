@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   visuals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 16:14:43 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/12 12:11:24 by bastalze         ###   ########.fr       */
+/*   Created: 2026/03/12 12:09:58 by bastalze          #+#    #+#             */
+/*   Updated: 2026/03/12 12:19:06 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "so_long.h"
+# include "so_long.h"
+# include <mlx.h>
 
-int	main(int argc, char **argv)
+int	main()
 {
-	static t_game	game;
+	void	*mlx;
+	void	*mlx_game;
 
-	if (argc != 2)
-	{
-		ft_error("Please enter a valid .ber file name as an argument. \
-			For example: \"map.ber\"", &game);
-	}
-	ft_file_type(argv[1], &game);
-	ft_parse_map(argv[1], &game);
-	ft_is_map_valid(&game);
-	ft_start_window(&game);
+	mlx = mlx_init();
+	mlx_game = mlx_new_window(mlx, 1920, 1080, "so_long chicken life");
+	mlx_loop(mlx);
 }

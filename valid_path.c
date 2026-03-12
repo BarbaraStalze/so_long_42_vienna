@@ -20,14 +20,14 @@ static char	**ft_copy_map(t_game *game, char **test_map, t_path *path_params)
 	while (game->map[i])
 	{
 		j = 0;
+		test_map[i] = calloc(game->map_width + 1, sizeof(char));
+		if (!test_map[i])
+		{
+			ft_free_array(test_map);
+			ft_error("Malloc failed\n", game);
+		}
 		while (game->map[i][j])
 		{
-			test_map[i] = calloc(game->map_width + 1, sizeof(char));
-			if (!test_map[i])
-			{
-				ft_free_array(test_map);
-				ft_error("Malloc failed\n", game);
-			}
 			test_map[i][j] = game->map[i][j];
 			if (test_map[i][j] == 'P')
 			{

@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:38:28 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/11 17:05:25 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/12 12:15:06 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 50
 # endif
 
-//# include <mlx.h>
+# include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>

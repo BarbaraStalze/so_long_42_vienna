@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 11:01:58 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/11 18:17:55 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/12 11:39:11 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -39,14 +39,14 @@ void	ft_file_type(char *filename, t_game *game)
 	dot = strrchr(filename, '.');
 	if (!dot || dot == filename)
         {
-                ft_error("Please enter a valid .ber file name as an argument.\
-                        For example: \"map.ber\"\n", game);
+                ft_error("Please enter a valid .ber file name as an argument. \
+For example: \"map.ber\"\n", game);
         }
 	ber = strncmp(dot, ".ber", 5);
 	if (ber != 0)
         {
-                ft_error("Please enter a valid .ber file name as an argument.\
-                        For example: \"map.ber\"\n", game);
+                ft_error("Please enter a valid .ber file name as an argument. \
+For example: \"map.ber\"\n", game);
         }
 }
 
