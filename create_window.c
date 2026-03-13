@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visuals.c                                          :+:      :+:    :+:   */
+/*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 12:09:58 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/12 12:19:06 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/13 17:54:09 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-# include "so_long.h"
-# include <mlx.h>
+#include "so_long.h"
+#include <mlx.h>
 
-int	main()
+void	ft_start_window(t_game *game)
 {
-	void	*mlx;
-	void	*mlx_game;
-
-	mlx = mlx_init();
-	mlx_game = mlx_new_window(mlx, 1920, 1080, "so_long chicken life");
-	mlx_loop(mlx);
+	game->mlx = mlx_init();
+	game->window = mlx_new_window(game->mlx, game->map_width * 32, game->map_height * 32,
+		"so_long: THE SECRET LIFE OF A CHICKEN");
+	game->img.size = 32;
+	ft_open_images(game);
+	ft_put_image(game);
+	mlx_loop(game->mlx);
 }
