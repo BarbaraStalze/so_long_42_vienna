@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:38:28 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/13 18:31:09 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/16 15:08:37 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -57,13 +57,9 @@ typedef struct	s_game
 	void	*mlx;
 	void	*window;
 	t_image	img;
+	int		start_i;
+	int		start_j;
 }	t_game;
-
-typedef struct  s_path
-{
-	int	start_h;
-	int	start_w;
-}	t_path;
 
 void	ft_file_type(char *filename, t_game *game);
 void	ft_parse_map(char *ber_file, t_game *game);
@@ -71,13 +67,12 @@ void	ft_free_array(char **a);
 void	ft_is_map_valid(t_game *game);
 void	ft_valid_path(t_game *game);
 void	ft_error(char *message, t_game *game);
-void	ft_game_construction(t_game *game);
 void	ft_open_images(t_game *game);
 void	ft_put_image(t_game *game);
 void	ft_start_window(t_game *game);
 void	ft_close_imgs(t_game *game);
 void	ft_no_img_error(t_game *game);
 void	ft_moves(t_game *game);
-void	ft_close_game(game);
+int		ft_close_game(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:35:06 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/11 18:16:09 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/16 16:48:47 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -51,14 +51,14 @@ static void	ft_map_size(t_game *game)
 		if (!line)
 			break;
 		if (game->map_height == 0)
-			game->map_width = strlen(line);
-		else if ((int)(strlen(line)) != game->map_width)
+			game->map_width = strlen(line) - 1;
+		else if ((int)(strlen(line)) != game->map_width + 1)
 				ft_error("Rows are not equally sized\n", game);
 		free(line);
 		game->map_height++;
 	}
-	if (errno == ENOMEM)
-		ft_error("Malloc failed\n", game);
+	if (errno > 0)
+		ft_error("Malloc or read failed\n", game);
 }
 
 void	ft_parse_map(char *ber_file, t_game *game)

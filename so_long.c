@@ -6,10 +6,11 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:14:43 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/13 18:31:22 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/16 16:48:39 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
@@ -25,4 +26,6 @@ int	main(int argc, char **argv)
 	ft_is_map_valid(&game);
 	ft_start_window(&game);
 	ft_moves(&game);
+	mlx_loop(game.mlx);
 }
+

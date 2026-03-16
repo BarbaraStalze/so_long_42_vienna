@@ -6,12 +6,12 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 11:02:30 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/11 18:42:45 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/16 15:30:53 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
 
-static char	**ft_copy_map(t_game *game, char **test_map, t_path *path_params)
+static char	**ft_copy_map(t_game *game, char **test_map)
 {
 	int	i;
 	int	j;
@@ -31,8 +31,8 @@ static char	**ft_copy_map(t_game *game, char **test_map, t_path *path_params)
 			test_map[i][j] = game->map[i][j];
 			if (test_map[i][j] == 'P')
 			{
-				path_params->start_h = i;
-				path_params->start_w = j;
+				game->start_i = i;
+				game->start_j = j;
 			}
 			j++;
 		}
@@ -82,15 +82,14 @@ static void	ft_all_flooded(char **test_map, t_game *game)
 void	ft_valid_path(t_game *game)
 {
 	char			**test_map;
-	static t_path	path_params;
 	int				collectibles;
 
 	test_map = malloc((game->map_height + 1) * sizeof(char *));
 	if (!test_map)
 		ft_error("Malloc failed\n", game);
-	test_map = ft_copy_map(game, test_map, &path_params);
+	test_map = ft_copy_map(game, test_map);
 	collectibles = game->collectibles;
-	test_map = ft_flood_fill(test_map, path_params.start_h, path_params.start_w, &collectibles);
+	test_map = ft_flood_fill(test_map, game->start_i, game->start_j, &collectibles);
 	ft_all_flooded(test_map, game);
 	ft_free_array(test_map);
 }

@@ -11,7 +11,7 @@ SOURCES = so_long.c \
 		is_map_valid.c \
 		valid_path.c \
 		error.c \
-		visuals.c \
+		create_window.c \
 		open_images.c \
 		put_images.c \
 		img_error.c \
