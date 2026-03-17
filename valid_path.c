@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 11:02:30 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/16 15:30:53 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/17 22:46:18 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -33,6 +33,11 @@ static char	**ft_copy_map(t_game *game, char **test_map)
 			{
 				game->start_i = i;
 				game->start_j = j;
+			}
+			else if (test_map[i][j] == 'E')
+			{
+				game->exit_i = i;
+				game->exit_j = j;
 			}
 			j++;
 		}
@@ -89,7 +94,8 @@ void	ft_valid_path(t_game *game)
 		ft_error("Malloc failed\n", game);
 	test_map = ft_copy_map(game, test_map);
 	collectibles = game->collectibles;
-	test_map = ft_flood_fill(test_map, game->start_i, game->start_j, &collectibles);
+	test_map = ft_flood_fill(test_map, game->start_i, game->start_j,
+			&collectibles);
 	ft_all_flooded(test_map, game);
 	ft_free_array(test_map);
 }

@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:14:07 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/13 18:23:52 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/17 19:19:06 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -78,4 +78,16 @@ void	ft_error(char *message, t_game *game)
 		free (error_message);
 	}
 	exit (EXIT_FAILURE);
+}
+
+int	ft_close_game(t_game *game)
+{
+	if (game->map)
+		ft_free_array(game->map);
+	if (game->fd > 0)
+		close(game->fd);
+	ft_close_imgs(game);
+	mlx_destroy_window(game->mlx, game->window);
+	exit (EXIT_FAILURE);
+	return (0);
 }

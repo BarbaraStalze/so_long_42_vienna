@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:38:28 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/16 15:08:37 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/17 22:44:20 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -27,7 +27,7 @@
 # include "libft/get_next_line.h"
 # include "libft/libft.h"
 
-typedef struct	s_image
+typedef struct s_image
 {
 	int		size;
 	void	*chicken_l;
@@ -45,9 +45,10 @@ typedef struct	s_image
 	void	*fence_t_l;
 	void	*fence_t_r;
 	void	*nothing;
+	void	*end;
 }	t_image;
 
-typedef struct	s_game
+typedef struct s_game
 {
 	char	**map;
 	int		map_width;
@@ -59,6 +60,10 @@ typedef struct	s_game
 	t_image	img;
 	int		start_i;
 	int		start_j;
+	int		exit_i;
+	int		exit_j;
+	int		move;
+	int		moves;
 }	t_game;
 
 void	ft_file_type(char *filename, t_game *game);
