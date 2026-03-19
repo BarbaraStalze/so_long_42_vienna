@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:35:06 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/17 22:41:38 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/19 12:17:06 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -32,11 +32,10 @@ static void	ft_build_array(t_game *game)
 			game->map[i][j] = line[j];
 			j++;
 		}
-		game->map[i][j] = 0;
+		game->map[i++][j] = 0;
 		free(line);
-		i++;
 	}
-	if (errno == ENOMEM)
+	if (errno > 0)
 		ft_error("Malloc failed\n", game);
 	game->map[i] = NULL;
 }

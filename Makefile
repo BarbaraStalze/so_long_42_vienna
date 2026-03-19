@@ -3,34 +3,35 @@
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-MLXRULE = -I/usr/include -Imlx_linux -O3
-LINKAPI = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-OBJFILES = $(SOURCES:.c=.o)
+MLX_LINKING = -lmlx -lXext -lX11 -lm -lz
+INCLUDE_MLX_HEADERS = -I/usr/include -Ilibft
 SOURCES = so_long.c \
 		parse_map.c \
 		is_map_valid.c \
 		valid_path.c \
 		error.c \
-		create_window.c \
 		open_images.c \
 		put_images.c \
-		img_error.c \
+		close_images.c \
 		moves.c \
+OBJFILES = $(SOURCES:.c=.o)
 
 all : $(NAME)
 
 $(NAME) : $(OBJFILES)
 	@make -C libft bonus
-	$(CC) $(CFLAGS) $(OBJFILES) $(LINKAPI) libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJFILES) $(MLX_LINKING) libft/libft.a -o $(NAME)
 
-%.o : %.c so_long.h
-	$(CC) $(CFLAGS) $(MLXRULE) -c $< -o $@
+%.o : %.c
+	$(CC) $(CFLAGS) $(INCLUDE_MLX_HEADERS) -c $< -o $@
 
 clean:
 	rm -f $(OBJFILES)
+	@make -C libft clean
 
 fclean:clean
 	rm -f $(NAME)
+	@make -C libft fclean
 
 re:fclean all
 

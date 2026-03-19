@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 11:14:16 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/17 22:39:40 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/19 14:49:24 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -85,16 +85,12 @@ static void	ft_open_chicken_bush_imgs(t_game *game)
 			&game->img.size, &game->img.size);
 	if (!game->img.bush)
 		ft_no_img_error(game);
-	game->img.end = mlx_xpm_file_to_image(game->mlx, "sprites/end.xpm",
-			&game->img.size, &game->img.size);
-	if (!game->img.bush)
-		ft_no_img_error(game);
 }
 
 void	ft_open_images(t_game *game)
 {
 	ft_open_fence_corner_imgs(game);
 	ft_open_fence_imgs(game);
-	ft_open_CEO_imgs(game);
+	ft_open_ceo_imgs(game);
 	ft_open_chicken_bush_imgs(game);
 }

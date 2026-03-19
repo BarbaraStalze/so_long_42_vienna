@@ -6,10 +6,24 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 11:02:30 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/17 22:46:18 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/19 14:47:46 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
+
+static void	ft_add_start_and_exit(t_game *game, char letter, int i, int j)
+{
+	if (letter == 'P')
+	{
+		game->start_i = i;
+		game->start_j = j;
+	}
+	else if (letter == 'E')
+	{
+		game->exit_i = i;
+		game->exit_j = j;
+	}
+}
 
 static char	**ft_copy_map(t_game *game, char **test_map)
 {
@@ -20,7 +34,7 @@ static char	**ft_copy_map(t_game *game, char **test_map)
 	while (game->map[i])
 	{
 		j = 0;
-		test_map[i] = calloc(game->map_width + 1, sizeof(char));
+		test_map[i] = ft_calloc(game->map_width + 1, sizeof(char));
 		if (!test_map[i])
 		{
 			ft_free_array(test_map);
@@ -29,16 +43,7 @@ static char	**ft_copy_map(t_game *game, char **test_map)
 		while (game->map[i][j])
 		{
 			test_map[i][j] = game->map[i][j];
-			if (test_map[i][j] == 'P')
-			{
-				game->start_i = i;
-				game->start_j = j;
-			}
-			else if (test_map[i][j] == 'E')
-			{
-				game->exit_i = i;
-				game->exit_j = j;
-			}
+			ft_add_start_and_exit(game, test_map[i][j], i, j);
 			j++;
 		}
 		test_map[i][j] = 0;

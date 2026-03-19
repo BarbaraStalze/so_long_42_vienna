@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:38:28 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/17 22:44:20 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/19 15:19:22 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -57,6 +57,7 @@ typedef struct s_game
 	int		fd;
 	void	*mlx;
 	void	*window;
+	void	*window_end;
 	t_image	img;
 	int		start_i;
 	int		start_j;
@@ -64,6 +65,7 @@ typedef struct s_game
 	int		exit_j;
 	int		move;
 	int		moves;
+	int		won;
 }	t_game;
 
 void	ft_file_type(char *filename, t_game *game);
@@ -74,10 +76,10 @@ void	ft_valid_path(t_game *game);
 void	ft_error(char *message, t_game *game);
 void	ft_open_images(t_game *game);
 void	ft_put_image(t_game *game);
-void	ft_start_window(t_game *game);
 void	ft_close_imgs(t_game *game);
 void	ft_no_img_error(t_game *game);
 void	ft_moves(t_game *game);
 int		ft_close_game(t_game *game);
+int		ft_key_hook_esc(int keycode, t_game *game);
 
 #endif
