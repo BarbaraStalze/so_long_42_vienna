@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:14:43 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/19 14:15:53 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/20 17:40:08 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -20,8 +20,8 @@ static void	ft_start_window(t_game *game)
 	if (!game->mlx)
 		ft_error("Initiation of display failed\n", game);
 	mlx_get_screen_size(game->mlx, &sizex, &sizey);
-	if (game->map_width * 32 > sizex || game->map_height * 32 > sizey)
-		ft_error("Map is too big\n", game);
+//	if (game->map_width * 32 > sizex || game->map_height * 32 > sizey)
+//		ft_error("Map is too big\n", game);
 	game->window = mlx_new_window(game->mlx, game->map_width * 32,
 			game->map_height * 32, "THE SECRET LIFE OF A CHICKEN");
 	if (!game->window)
@@ -46,4 +46,5 @@ int	main(int argc, char **argv)
 	ft_start_window(&game);
 	ft_moves(&game);
 	mlx_loop(game.mlx);
+	ft_close_game(&game);
 }

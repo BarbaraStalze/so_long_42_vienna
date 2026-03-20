@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                    I                    :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:35:06 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/19 12:17:06 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/20 17:03:16 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -20,12 +20,12 @@ static void	ft_build_array(t_game *game)
 	i = 0;
 	while (1)
 	{
-		game->map[i] = ft_calloc(game->map_width + 1, sizeof(char));
-		if (!game->map[i])
-			ft_error("Malloc failed\n", game);
 		line = get_next_line(game->fd);
 		if (!line)
 			break ;
+		game->map[i] = ft_calloc(game->map_width + 1, sizeof(char));
+		if (!game->map[i])
+			ft_error("Malloc failed\n", game);
 		j = 0;
 		while (line[j] != '\n')
 		{
@@ -35,8 +35,8 @@ static void	ft_build_array(t_game *game)
 		game->map[i++][j] = 0;
 		free(line);
 	}
-	if (errno > 0)
-		ft_error("Malloc failed\n", game);
+	if (errno)
+		ft_error("Get_next_line failed\n", game);
 	game->map[i] = NULL;
 }
 
@@ -52,7 +52,10 @@ static void	ft_map_size(t_game *game)
 		if (game->map_height == 0)
 			game->map_width = ft_strlen(line) - 1;
 		else if ((int)(ft_strlen(line)) != game->map_width + 1)
+		{
+			free(line);
 			ft_error("Rows are not equally sized\n", game);
+		}
 		free(line);
 		game->map_height++;
 	}

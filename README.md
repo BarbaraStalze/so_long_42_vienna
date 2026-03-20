@@ -6,7 +6,7 @@
 
 
 ## Instruction
-If you use a map, that creates a game bigger than your screen: undefined behaviour.
+If you use a map, that creates a game bigger than your screen height it is not playable.
 
 ## Resources
 

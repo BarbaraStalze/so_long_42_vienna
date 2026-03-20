@@ -13,7 +13,7 @@ SOURCES = so_long.c \
 		open_images.c \
 		put_images.c \
 		close_images.c \
-		moves.c \
+		moves.c
 OBJFILES = $(SOURCES:.c=.o)
 
 all : $(NAME)

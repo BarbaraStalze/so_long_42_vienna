@@ -9,7 +9,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/so_long",
-		"args": ["maps/map2.ber"],
+		"args": ["/home/bastalze/so_long/maps/smallest.ber"],
 		"stopAtEntry": false,
 		"cwd": "${fileDirname}",
 		"environment": [],
