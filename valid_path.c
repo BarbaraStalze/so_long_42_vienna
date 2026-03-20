@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 11:02:30 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/20 17:39:39 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/20 21:44:57 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -25,7 +25,7 @@ static void	ft_add_start_and_exit(t_game *game, char letter, int i, int j)
 	}
 }
 
-static char	**ft_copy_map(t_game *game, char **test_map)
+static char	**ft_copy_map(t_game *game)
 {
 	int	i;
 	int	j;
@@ -34,73 +34,54 @@ static char	**ft_copy_map(t_game *game, char **test_map)
 	while (game->map[i])
 	{
 		j = 0;
-		test_map[i] = ft_calloc(game->map_width + 1, sizeof(char));
-		if (!test_map[i])
+		game->test_map[i] = ft_calloc(game->map_width + 1, sizeof(char));
+		if (!game->test_map[i])
 		{
-			ft_free_array(test_map);
+			ft_free_array(game->test_map);
 			ft_error("Malloc failed in copy map\n", game);
 		}
 		while (game->map[i][j])
 		{
-			test_map[i][j] = game->map[i][j];
-			ft_add_start_and_exit(game, test_map[i][j], i, j);
+			game->test_map[i][j] = game->map[i][j];
+			ft_add_start_and_exit(game, game->test_map[i][j], i, j);
 			j++;
 		}
-		test_map[i][j] = 0;
+		game->test_map[i][j] = 0;
 		i++;
 	}
-	test_map[i] = NULL;
-	return (test_map);
+	game->test_map[i] = NULL;
+	return (game->test_map);
 }
 
-static char	**ft_flood_fill(char **test_map, int i, int j, int *collectibles)
+static void	ft_flood_fill(t_game *game, int i, int j)
 {
-	if (test_map[i][j] == '1' || (test_map[i][j] == 'E' && *collectibles != 0))
-		return (test_map);
-	if (test_map[i][j] == 'C')
-		(*collectibles)--;
-	test_map[i][j] = '1';
-	ft_flood_fill(test_map, i - 1, j, collectibles);
-	ft_flood_fill(test_map, i, j + 1, collectibles);
-	ft_flood_fill(test_map, i + 1, j, collectibles);
-	ft_flood_fill(test_map, i, j - 1, collectibles);
-	return (test_map);
-}
-
-static void	ft_all_flooded(char **test_map, t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (test_map[i])
+	if (game->test_map[i][j] == '1' || (game->test_map[i][j] == 'E'))
 	{
-		j = 0;
-		while (test_map[i][j])
-		{
-			if (test_map[i][j] == 'C' || test_map[i][j] == 'E')
-			{
-				ft_free_array(test_map);
-				ft_error("Map has no valid path\n", game);
-			}
-			j++;
-		}
-		i++;
+		if (game->test_map[i][j] == 'E')
+			game->exit_found++;
+		return ;
 	}
+	if (game->test_map[i][j] == 'C')
+		game->collectibles_found++;
+	game->test_map[i][j] = '1';
+	ft_flood_fill(game, i - 1, j);
+	ft_flood_fill(game, i, j + 1);
+	ft_flood_fill(game, i + 1, j);
+	ft_flood_fill(game, i, j - 1);
+	return ;
 }
 
 void	ft_valid_path(t_game *game)
 {
-	char			**test_map;
-	int				collectibles;
-
-	test_map = malloc((game->map_height + 1) * sizeof(char *));
-	if (!test_map)
+	game->test_map = malloc((game->map_height + 1) * sizeof(char *));
+	if (!game->test_map)
 		ft_error("Malloc failed in ft_valid_path\n", game);
-	test_map = ft_copy_map(game, test_map);
-	collectibles = game->collectibles;
-	test_map = ft_flood_fill(test_map, game->start_i, game->start_j,
-			&collectibles);
-	ft_all_flooded(test_map, game);
-	ft_free_array(test_map);
+	game->test_map = ft_copy_map(game);
+	ft_flood_fill(game, game->start_i, game->start_j);
+	if (game->exit_found == 0 || game->collectibles_found != game->collectibles)
+	{
+		ft_free_array(game->test_map);
+		ft_error("Map has no valid path\n", game);
+	}
+	ft_free_array(game->test_map);
 }

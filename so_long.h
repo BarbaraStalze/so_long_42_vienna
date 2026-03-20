@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:38:28 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/19 15:19:22 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/20 21:22:40 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -51,9 +51,12 @@ typedef struct s_image
 typedef struct s_game
 {
 	char	**map;
+	char	**test_map;
 	int		map_width;
 	int		map_height;
 	int		collectibles;
+	int		collectibles_found;
+	int		exit_found;
 	int		fd;
 	void	*mlx;
 	void	*window;
