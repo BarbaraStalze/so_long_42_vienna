@@ -48,7 +48,7 @@ static void	ft_build_array(t_game *game)
 		if (!game->map[i])
 			ft_error("Malloc failed", game);
 		j = 0;
-		while (line[j] != '\n')
+		while (line[j] != '\n' && line[j] != 0)
 		{
 			game->map[i][j] = line[j];
 			j++;
@@ -59,6 +59,17 @@ static void	ft_build_array(t_game *game)
 	if (errno)
 		ft_error("Get_next_line failed", game);
 	game->map[i] = NULL;
+}
+static int	ft_map_width(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] != 0 && line[i] != '\n')
+	{
+		i++;
+	}
+	return (i);
 }
 
 static void	ft_map_size(t_game *game)
@@ -71,8 +82,8 @@ static void	ft_map_size(t_game *game)
 		if (!line)
 			break ;
 		if (game->map_height == 0)
-			game->map_width = ft_strlen(line) - 1;
-		else if ((int)(ft_strlen(line)) != game->map_width + 1)
+			game->map_width = ft_map_width(line);
+		else if (ft_map_width(line) != game->map_width)
 		{
 			free(line);
 			errno = EINVAL;

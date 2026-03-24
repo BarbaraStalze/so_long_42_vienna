@@ -49,13 +49,15 @@ char	*find_nl(char *remainder, char *buffer, int fd)
 	int		b_read;
 	char	*line;
 
+	(void)fd;
 	line = remainder_to_start(remainder);
 	if (!line)
 		return (NULL);
 	while (1)
 	{
+		errno = 0;
 		b_read = read(fd, buffer, BUFFER_SIZE);
-		if (b_read <= 0)
+		if (b_read <= 0 || errno != 0)
 			break ;
 		buffer[b_read] = 0;
 		line = ft_strjoin_get(line, buffer);
