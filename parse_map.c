@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:35:06 by bastalze          #+#    #+#             */
-/*   Updated: 2026/03/23 18:01:55 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/03/27 15:05:33 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -60,9 +60,10 @@ static void	ft_build_array(t_game *game)
 		ft_error("Get_next_line failed", game);
 	game->map[i] = NULL;
 }
+
 static int	ft_map_width(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] != 0 && line[i] != '\n')
